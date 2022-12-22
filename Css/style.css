@@ -110,7 +110,7 @@ body {
 /* hover css */
 .username:focus {
     border-color: #86b7fe;
-    box-shadow: 0 0 0 0.5rem #b9d3fa;
+    box-shadow: 0 0 0.2rem 0.25rem #0062f5;
 }
 
 /* css for button and text field size and round corner */
