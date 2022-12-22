@@ -3,30 +3,31 @@ html {
     font-size: 62.5%;
 }
 
+/* i use flex to align main panel div to center */
 body {
     height: 100vh;
     display: flex;
     flex-direction: column;
     align-content: space-around;
-    justify-content: center;
+    justify-content: space-evenly;
     align-items: center;
     font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
     text-shadow: 2px 2px 3px rgba(0, 0, 0, 0.5);
+    background: radial-gradient(circle at 60% 30%, rgb(86, 255, 71) 20%, rgb(0, 255, 170) 40%, dodgerblue 90%);
 }
 
+/* i use 2*1 grid for information and submit-form align */
 .main-panel {
     display: grid;
-    grid-gap: 1rem;
+    grid-gap: 1.5rem;
     grid-template-columns: repeat(2, auto);
 }
 
+/* i set a grid template to handel image, info and bio */
 .information {
     grid-gap: 2rem;
 
-    border-radius: 0.5rem;
-    border: 0.3rem solid black;
-
-    padding: 1rem;
+    padding: 2rem;
     min-height: 300px;
     width: fit-content;
 
@@ -34,60 +35,86 @@ body {
     justify-items: center;
 
     grid-template:
-        "picture person-info"
-        "describe describe"
+        "picture person-info" 1fr
+        "describe describe" auto
         / 15rem auto
     ;
 
-    /* filter: drop-shadow(0px 0px 4px #4444dd); */
+    background: transparent;
 
 }
 
+/* css for image */
 .information>img {
     grid-area: "picture";
     height: 15rem;
     border-radius: 7.5rem;
 }
 
-.information>div {
-    width: 100%;
+/* remove margin p in information div */
+.information>div>p {
+    margin: 0;
 }
 
+/* add box shadow to div, image and input */
+.information,
+.submit-form,
+.submit-form input,
 .information>* {
-    box-shadow: 0rem 0rem 5px 0.2rem #0d6efd;
+    border-radius: 0.5rem;
+    box-shadow: 0rem 0rem 0.8rem 0.2rem #023179;
 }
 
-.submit-form {}
+/* use flex in form to align center */
+.submit-form {
+    display: flex;
 
+    align-items: center;
 
+    padding: 2rem;
+    width: 22rem;
+
+    background: transparent;
+}
+
+/* css for changing margin */
+.submit-form>form * {
+    margin: 0.5rem 0;
+}
+
+/* css for information panel */
 #info {
     grid-area: person-info;
-    border-radius: 0.5rem;
-    margin: 0rem;
     padding: 0.2rem;
     width: 100%;
+    min-width: 200px;
+    background-color: white;
 }
 
+/* css for bio panel */
 #bio {
     grid-area: describe;
-    border-radius: 0.5rem;
-    margin: 0rem;
     padding: 0.2rem;
     width: 100%;
+    min-height: 200px;
+    background-color: white;
 }
 
-.form-control {
+/* transition for slow change in hover color around username text field */
+.username {
     border: 1px solid #ced4da;
     outline: 0;
     transition: border 0.15s, box-shadow 0.15s;
 }
 
-.form-control:focus {
+/* hover css */
+.username:focus {
     border-color: #86b7fe;
     box-shadow: 0 0 0 0.5rem #b9d3fa;
 }
 
-.form-control,
+/* css for button and text field size and round corner */
+.username,
 .btn {
     width: 100%;
     border-radius: 0.5rem;
@@ -95,6 +122,7 @@ body {
     padding: 1.5rem;
 }
 
+/* css for button background color and round corner */
 .btn {
     background-color: #0d6efd;
     color: #fff;
