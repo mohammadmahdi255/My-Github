@@ -5,7 +5,9 @@ const usernameInput = document.querySelector(".username");
 const submitBotton = document.querySelector(".submit");
 
 function submit() {
-    // username = "1995parham";
+    
+    if(usernameInput.value == "")
+        return;
 
     fetch(`https://api.github.com/users/${usernameInput.value}`, {
         method: 'GET',
