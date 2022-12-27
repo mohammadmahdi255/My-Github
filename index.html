@@ -10,10 +10,7 @@
 	<body>
 		<div class="main-panel">
 			<div class="information">
-				<img
-					src="/images/Mohammad-Mahdi.jpg"
-					alt="An image of mohammad mahdi nemati"
-				/>
+				<img />
 				<div id="info">
 					<p>Empty</p>
 				</div>
@@ -22,21 +19,22 @@
 				</div>
 			</div>
 			<div class="submit-form">
-				<form method="POST">
+				<form>
 					<h1>Please Enter Username</h1>
 					<div class="form-group">
 						<input
 							class="username"
 							type="text"
 							placeholder="Username"
-							minlength="5"
 							maxlength="255"
 							autofocus
+							required
 						/>
 					</div>
-					<button class="btn">Submit</button>
+					<button type="button" class="submit">Submit</button>
 				</form>
 			</div>
 		</div>
+		<script src="/JS/script.js"></script>
 	</body>
 </html>
