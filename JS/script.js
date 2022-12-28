@@ -3,6 +3,7 @@ const info = document.querySelector("#info");
 const bio = document.querySelector("#bio");
 const usernameInput = document.querySelector(".username");
 const submitBotton = document.querySelector(".submit");
+const actionResult = document.querySelector(".action-result");
 
 // submit form and send request to server and get data
 // for input name then call functions to show result
@@ -34,9 +35,11 @@ function submit(e) {
         },
     })
     .then(response => {
-        if(response.status == 200) {
-            processResponse(response)
+        if(response.status != 200) {
+            errorAlert(response.status)
+            return;
         }
+        processResponse(response)
     });
 
 }
@@ -59,7 +62,13 @@ function processResponse(response) {
                 'Accept': 'application/json',
             },
         })
-        .then(response => response.json())
+        .then(response => {
+            if(response.status != 200) {
+                errorAlert(response.status)
+                return;
+            }
+            return response.json();
+        })
         .then(obj => {
             obj.sort((a, b) => {
                 if(a.language == null && b.language == null)
@@ -86,19 +95,21 @@ function processResponse(response) {
     });
 }
 
+//  set profile for info, bio and account image
 function setProfile(obj) {
     accountImg.src = obj.avatar_url;
 
     info.innerHTML =
     `
-    ${obj.name == "" ? "" : `<p>Name: ${obj.name}</p>`}
-    ${obj.blog == "" ? "" : `<p>Blog: ${obj.blog}</p>`}
-    ${obj.location == null ? "" : `<p>Location: ${obj.location}</p>`}
-    ${obj.favoriteLanguage == null ? "" : `<p>Favorite Language: ${obj.favoriteLanguage}</p>`}
+    ${obj.name == null || obj.name == "" ? "" : `<p>Name: ${obj.name}</p>`}
+    ${obj.blog == null || obj.blog == "" ? "" : `<p>Blog: ${obj.blog}</p>`}
+    ${obj.location == null || obj.location == "" ? "" : `<p>Location: ${obj.location}</p>`}
+    ${obj.favoriteLanguage == null || obj.favoriteLanguage == "" ? "" : `<p>Favorite Language: ${obj.favoriteLanguage}</p>`}
     `
-    bio.innerHTML = `<p>${obj.bio}</p>`.replace("\n", "<br />");
+    bio.innerHTML = `<p>${obj.bio == null ? "" : obj.bio}</p>`.replace("\n", "<br />");
 
     saveData(usernameInput.value, obj)
+    errorAlert(200)
 }
 
 // save data in local storage
@@ -123,8 +134,18 @@ function checkValidity(name) {
     return foundValid == name;
 }
 
+// show network error 
+function errorAlert(title) {
+    console.log(actionResult);
+    actionResult.style.display = "block";
+    actionResult.innerHTML = `<span> Response Error: ${title}</span>`;
+    setTimeout(() => { // removes the error message from screen after 4 seconds.
+        actionResult.style.display = "none";
+    }, 4000);
+}
 
 
+// set even listener and clear local storage
 submitBotton.addEventListener("click", submit);
 document.addEventListener("keypress", (e) => e.code == "Enter" ? submit(e) : null);
 window.localStorage.clear();
