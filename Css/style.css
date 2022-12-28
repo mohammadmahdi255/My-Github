@@ -15,6 +15,7 @@ body {
     text-shadow: 2px 2px 3px rgba(0, 0, 0, 0.5);
     background: radial-gradient(circle at 60% 30%, rgb(86, 255, 71) 20%, rgb(0, 255, 170) 40%, dodgerblue 90%);
     backdrop-filter: blur(20px);
+    min-width: 72rem;
 }
 
 /* i use 2*1 grid for information and submit-form align */
